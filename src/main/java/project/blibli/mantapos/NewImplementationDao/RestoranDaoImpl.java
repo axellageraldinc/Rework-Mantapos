@@ -75,13 +75,18 @@ public class RestoranDaoImpl implements RestoranDao {
     @Override
     public void insert(Restoran modelData) throws SQLException {
         Connection connection = DbConnection.openConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO " + tableRestoran + "(" + namaResto + "," + alamatResto + ")" +
-                        "VALUES(?,?)"
-        );
-        preparedStatement.setString(1, modelData.getNamaResto());
-        preparedStatement.setString(2, modelData.getLokasiResto());
-        preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO " + tableRestoran + "(" + namaResto + "," + alamatResto + ")" +
+                            "VALUES(?,?)"
+            );
+            preparedStatement.setString(1, modelData.getNamaResto());
+            preparedStatement.setString(2, modelData.getLokasiResto());
+            preparedStatement.executeUpdate();
+        } catch (Exception ex){
+            System.out.println("sudah ada restoran");
+        }
         DbConnection.closePreparedStatement(preparedStatement);
         DbConnection.closeConnection(connection);
     }

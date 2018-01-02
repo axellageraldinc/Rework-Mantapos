@@ -20,19 +20,19 @@ public class MantaposApplication {
 		restoranDao.createTable();
 
 		UserDaoImpl userDao = new UserDaoImpl();
-//		userDao.createRoleUsers();
+		userDao.createRoleUsers();
 		userDao.createTable();
 		userDao.createTableUsersRole();
 
 		Restoran restoran = new Restoran("ADMIN", "ADMIN");
-//		restoranDao.insert(restoran);
+		restoranDao.insert(restoran);
 
 		User user = new User(
 				"axell", bCryptPasswordEncoder.encode("axell123"), "admin", "Axellageraldinc",
 				"123", "456", "jogja", "L", GetIdResto.getIdRestoBasedOnNamaResto("ADMIN"), true
 		);
-//		userDao.insert(user);
-//		userDao.insertTableUsersRole(user);
+		userDao.insert(user);
+		userDao.insertTableUsersRole(user);
 
 		MenuDaoImpl menuDao = new MenuDaoImpl();
 		menuDao.createTable();
@@ -44,7 +44,7 @@ public class MantaposApplication {
 		saldoAkhirDao.createTable();
 
 		LedgerDaoImpl ledgerDao = new LedgerDaoImpl();
-//		ledgerDao.createTipeLedger();
+		ledgerDao.createTipeLedger();
 		ledgerDao.createTable();
 		MenuYangDipesanDaoImpl menuYangDipesanDao = new MenuYangDipesanDaoImpl();
 		menuYangDipesanDao.createTable();

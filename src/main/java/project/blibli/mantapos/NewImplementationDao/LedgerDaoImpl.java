@@ -54,13 +54,18 @@ public class LedgerDaoImpl implements LedgerDao {
     @Override
     public void createTipeLedger() throws SQLException {
         Connection connection = DbConnection.openConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "CREATE TYPE " + tipeLedger + " AS ENUM " + "(" +
-                        "'" + tipeDebit + "'," +
-                        "'" + tipeKredit + "'" +
-                        ")"
-        );
-        preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "CREATE TYPE " + tipeLedger + " AS ENUM " + "(" +
+                            "'" + tipeDebit + "'," +
+                            "'" + tipeKredit + "'" +
+                            ")"
+            );
+            preparedStatement.executeUpdate();
+        } catch (Exception ex){
+            System.out.println("tipe ledger sudah ada");
+        }
         DbConnection.closePreparedStatement(preparedStatement);
         DbConnection.closeConnection(connection);
     }
