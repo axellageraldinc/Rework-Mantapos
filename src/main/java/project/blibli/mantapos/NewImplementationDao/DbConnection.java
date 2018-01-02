@@ -11,9 +11,9 @@ public class DbConnection {
     public static Connection openConnection(){
         try{
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/Mantapos_2",
-                    "postgres",
-                    "abcdefghijk"
+                    "jdbc:postgresql://ec2-54-235-165-114.compute-1.amazonaws.com:5432/d307isekgs7dgp",
+                    "lqfpawnvxitkpg",
+                    "f7432f942755985fac374c24aa648d2eece3e5bba9e71642aa129bb69ae7899d"
             );
             System.out.println("DB Connection opened successfully!");
         } catch (Exception ex){
