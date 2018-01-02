@@ -6,7 +6,7 @@
 	<groupId>project.blibli</groupId>
 	<artifactId>mantapos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>mantapos</name>
 	<description>Project blibli future batch 2 membuat Point of Sales system menggunakan Spring Boot</description>
