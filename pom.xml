@@ -25,6 +25,10 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
 		<!-- Dependency untuk file upload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
