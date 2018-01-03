@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import project.blibli.mantapos.Helper.GetIdResto;
 import project.blibli.mantapos.Model.User;
 import project.blibli.mantapos.NewImplementationDao.UserDaoImpl;
+import project.blibli.mantapos.NewInterfaceDao.UserDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,11 +17,15 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    UserDaoImpl userDao = new UserDaoImpl();
-    int itemPerPage=5;
+    UserDao userDao;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public EmployeeService(UserDao userDao, BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.userDao = userDao;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    int itemPerPage=5;
 
     public ModelAndView getMappingEmployee(Authentication authentication,
                                            Integer page) throws SQLException {
@@ -42,6 +47,7 @@ public class EmployeeService {
         mav.addObject("pageList", pageList);
         mav.addObject("userList", userList);
         mav.addObject("role", role);
+        mav.addObject("username", authentication.getName());
         return mav;
     }
 
@@ -120,9 +126,9 @@ public class EmployeeService {
                                   int page) throws SQLException {
         List<User> userList;
         if (getLoggedInUserRole(authentication).equals("[manager]")) {
-            userList = userDao.getAll("id_resto=" + idResto + " AND users_roles.username=users.username AND users_roles.role IN ('cashier') LIMIT " + itemPerPage + " OFFSET " + (page-1)*itemPerPage);
+            userList = userDao.getAll("id_resto=" + idResto + " AND users_roles.username=users.username AND users_roles.role IN ('cashier') ORDER BY users.id_user ASC LIMIT " + itemPerPage + " OFFSET " + (page-1)*itemPerPage);
         } else{
-            userList = userDao.getAll("id_resto=" + idResto + " AND users_roles.username=users.username AND users_roles.role IN ('manager','cashier') LIMIT " + itemPerPage + " OFFSET " + (page-1)*itemPerPage);
+            userList = userDao.getAll("id_resto=" + idResto + " AND users_roles.username=users.username AND users_roles.role IN ('manager','cashier') ORDER BY users.id_user ASC LIMIT " + itemPerPage + " OFFSET " + (page-1)*itemPerPage);
         }
         return userList;
     }

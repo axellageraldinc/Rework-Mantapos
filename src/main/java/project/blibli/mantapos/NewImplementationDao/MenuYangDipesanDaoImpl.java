@@ -1,5 +1,6 @@
 package project.blibli.mantapos.NewImplementationDao;
 
+import org.springframework.stereotype.Repository;
 import project.blibli.mantapos.Model.OrderedMenu;
 import project.blibli.mantapos.NewInterfaceDao.MenuYangDipesanDao;
 
@@ -8,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class MenuYangDipesanDaoImpl implements MenuYangDipesanDao {
 
     private static final String tableMenuYangDipesan = "menu_yang_dipesan";

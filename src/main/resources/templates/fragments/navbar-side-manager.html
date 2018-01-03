@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:fragment="sidebar-css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
         <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <script src="https://use.fontawesome.com/65cbf9020d.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script"/>
     </div>
 </head>
@@ -28,7 +30,7 @@
                     <a href="/saldo"><i class=""></i>Saldo</a>
                 </li>
                 <li>
-                    <a href="#">Keuangan<span class="glyphicon glyphicon-chevron-left"></span></a>
+                    <a href="#">Keuangan<span class="fa fa-sign-out"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/outcome">Outcome</a>

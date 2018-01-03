@@ -1,5 +1,6 @@
 package project.blibli.mantapos.NewImplementationDao;
 
+import org.springframework.stereotype.Repository;
 import project.blibli.mantapos.Model.Menu;
 import project.blibli.mantapos.NewInterfaceDao.MenuDao;
 
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class MenuDaoImpl implements MenuDao {
 
     private static final String tableMenu = "menu";

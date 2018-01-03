@@ -1,5 +1,6 @@
 package project.blibli.mantapos.NewImplementationDao;
 
+import org.springframework.stereotype.Repository;
 import project.blibli.mantapos.Model.Saldo;
 import project.blibli.mantapos.NewInterfaceDao.SaldoDao;
 
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class SaldoAwalDaoImpl implements SaldoDao {
 
     private static final String tableSaldoAwal = "saldo_awal";
@@ -46,13 +48,18 @@ public class SaldoAwalDaoImpl implements SaldoDao {
     @Override
     public void insert(Saldo modelData) throws SQLException {
         Connection connection = DbConnection.openConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO " + tableSaldoAwal + "(" + this.idResto + "," + saldoAwal + ")" +
-                        "VALUES(?,?)"
-        );
-        preparedStatement.setInt(1, modelData.getId_resto());
-        preparedStatement.setInt(2, modelData.getSaldo());
-        preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO " + tableSaldoAwal + "(" + this.idResto + "," + saldoAwal + ")" +
+                            "VALUES(?,?)"
+            );
+            preparedStatement.setInt(1, modelData.getId_resto());
+            preparedStatement.setInt(2, modelData.getSaldo());
+            preparedStatement.executeUpdate();
+        } catch (Exception ex){
+            System.out.println("Gagal insert saldo awal : " + ex.toString());
+        }
         DbConnection.closePreparedStatement(preparedStatement);
         DbConnection.closeConnection(connection);
     }
@@ -114,5 +121,10 @@ public class SaldoAwalDaoImpl implements SaldoDao {
     @Override
     public void activate(String condition) throws SQLException {
 
+    }
+
+    @Override
+    public int getBulanAwal(String condition) throws SQLException {
+        return 0;
     }
 }

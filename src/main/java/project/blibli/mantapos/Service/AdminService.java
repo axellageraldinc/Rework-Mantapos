@@ -9,6 +9,8 @@ import project.blibli.mantapos.Model.Restoran;
 import project.blibli.mantapos.Model.User;
 import project.blibli.mantapos.NewImplementationDao.RestoranDaoImpl;
 import project.blibli.mantapos.NewImplementationDao.UserDaoImpl;
+import project.blibli.mantapos.NewInterfaceDao.RestoranDao;
+import project.blibli.mantapos.NewInterfaceDao.UserDao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,10 +19,16 @@ import java.util.List;
 @Service
 public class AdminService {
 
-    RestoranDaoImpl restoranDao = new RestoranDaoImpl();
-    UserDaoImpl userDao = new UserDaoImpl();
+    RestoranDao restoranDao;
+    UserDao userDao;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    public AdminService(RestoranDao restoranDao, UserDao userDao, BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.restoranDao = restoranDao;
+        this.userDao = userDao;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     int itemPerPage=5;
 

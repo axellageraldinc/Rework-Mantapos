@@ -1,5 +1,7 @@
 package project.blibli.mantapos.Service.OwnerManager;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -7,6 +9,8 @@ import project.blibli.mantapos.Helper.GetIdResto;
 import project.blibli.mantapos.Model.Ledger;
 import project.blibli.mantapos.Model.Saldo;
 import project.blibli.mantapos.NewImplementationDao.*;
+import project.blibli.mantapos.NewInterfaceDao.LedgerDao;
+import project.blibli.mantapos.NewInterfaceDao.SaldoDao;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -16,9 +20,18 @@ import java.util.List;
 @Service
 public class OutcomeService {
 
-    SaldoAwalDaoImpl saldoAwalDao = new SaldoAwalDaoImpl();
-    SaldoAkhirDaoImpl saldoAkhirDao = new SaldoAkhirDaoImpl();
-    LedgerDaoImpl ledgerDao = new LedgerDaoImpl();
+    LedgerDao ledgerDao;
+    SaldoDao saldoAwalDao, saldoAkhirDao;
+
+    @Autowired
+    public OutcomeService(LedgerDao ledgerDao,
+                          @Qualifier("saldoAwalDaoImpl") SaldoDao saldoAwalDao,
+                          @Qualifier("saldoAkhirDaoImpl") SaldoDao saldoAkhirDao){
+        this.ledgerDao = ledgerDao;
+        this.saldoAwalDao = saldoAwalDao;
+        this.saldoAkhirDao = saldoAkhirDao;
+    }
+
     int itemPerPage=5;
     int bulan = LocalDate.now().getMonthValue();
     int tahun = LocalDate.now().getYear();
@@ -40,6 +53,7 @@ public class OutcomeService {
         mav.addObject("outcomeList", getPengeluaranHarian(idResto, page));
         mav.addObject("pageNo", page);
         mav.addObject("pageList", pageList);
+        mav.addObject("username", authentication.getName());
         return mav;
     }
 

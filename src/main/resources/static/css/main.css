@@ -178,8 +178,8 @@ div.scroll.menu{
 }
 
 #btnLogOut{
-    color: whitesmoke;
-    float: right !important;
+    /*color: whitesmoke;
+    float: right !important;*/
     font-family: Helvetica, serif;
     /*position: right !important;*/
 }
@@ -266,12 +266,16 @@ h5#custNameReceipt, h5#priceTotalReceipt, h5#CashReceipt, h5#ChangeReceipt{
 nav li a {
     color: white;
 }
-nav .navbar-nav li a:hover, nav .navbar-nav li a:focus{
+nav .navbar-nav li a:hover{
     color: whitesmoke;
     background-color: #920733;
 }
+nav .navbar-nav li a:focus{
+    color:black;
+    background-color:ce0a48;
+}
 
-.glyphicon-log-out{
+.fa fa-sign-out{
     font-size:18px;
 }
 

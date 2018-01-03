@@ -3,9 +3,9 @@ package project.blibli.mantapos.Model;
 import java.sql.Timestamp;
 
 public class Ledger {
-    private int id, tanggal, week, month, year, id_resto;
+    private int id, month, year, id_resto;
     private int biaya;
-    private String waktu, keperluan, tipe;
+    private String keperluan, tipe, quantity;
     private Timestamp dateCreated;
 
     public Ledger() {
@@ -16,6 +16,14 @@ public class Ledger {
         this.biaya = biaya;
         this.keperluan = keperluan;
         this.tipe = tipe;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public Timestamp getDateCreated() {
@@ -32,14 +40,6 @@ public class Ledger {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getTanggal() {
-        return tanggal;
-    }
-
-    public void setTanggal(int tanggal) {
-        this.tanggal = tanggal;
     }
 
     public String getTipe() {
@@ -66,14 +66,6 @@ public class Ledger {
         this.id_resto = id_resto;
     }
 
-    public int getWeek() {
-        return week;
-    }
-
-    public void setWeek(int week) {
-        this.week = week;
-    }
-
     public int getMonth() {
         return month;
     }
@@ -96,13 +88,5 @@ public class Ledger {
 
     public void setBiaya(int biaya) {
         this.biaya = biaya;
-    }
-
-    public String getWaktu() {
-        return waktu;
-    }
-
-    public void setWaktu(String waktu) {
-        this.waktu = waktu;
     }
 }

@@ -1,10 +1,12 @@
 package project.blibli.mantapos.Service.OwnerManager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import project.blibli.mantapos.Helper.GetIdResto;
 import project.blibli.mantapos.NewImplementationDao.LedgerDaoImpl;
+import project.blibli.mantapos.NewInterfaceDao.LedgerDao;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -14,7 +16,12 @@ import java.util.List;
 @Service
 public class DashboardService {
 
-    LedgerDaoImpl ledgerDao = new LedgerDaoImpl();
+    LedgerDao ledgerDao;
+
+    @Autowired
+    public DashboardService(LedgerDao ledgerDao){
+        this.ledgerDao = ledgerDao;
+    }
 
     public ModelAndView getMappingDashboard(Authentication authentication) throws SQLException {
         ModelAndView mav = new ModelAndView();
@@ -24,6 +31,7 @@ public class DashboardService {
         mav.addObject("dummyList", dummyLedgerList);
         mav.addObject("total_pengeluaran", getTotalPengeluaranAllTime(idResto));
         mav.addObject("total_pemasukkan", getTotalPemasukkanAllTime(idResto));
+        mav.addObject("username", authentication.getName());
         return mav;
     }
 

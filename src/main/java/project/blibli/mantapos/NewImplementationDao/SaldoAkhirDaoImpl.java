@@ -1,11 +1,13 @@
 package project.blibli.mantapos.NewImplementationDao;
 
+import org.springframework.stereotype.Repository;
 import project.blibli.mantapos.Model.Saldo;
 import project.blibli.mantapos.NewInterfaceDao.SaldoDao;
 
 import java.sql.*;
 import java.util.List;
 
+@Repository
 public class SaldoAkhirDaoImpl implements SaldoDao {
 
     private static final String tableSaldoAkhir = "saldo_akhir";

@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:fragment="header-css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
         <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <script src="https://use.fontawesome.com/65cbf9020d.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script"/>
-
-
     </div>
 </head>
 <body>
@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/menu">Menu</a></li>
-                <li><a href="#">Discount</a></li>
+                <!--<li><a href="#">Discount</a></li>-->
                 <li><a href="/employee">Employee</a></li>
                 <li><a href="/saldo">Saldo</a></li>
                 <li class="dropdown">
@@ -27,18 +27,25 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/outcome">Outcome</a></li>
-                        <li><a href="/income">Income (Non transaction)</a></li>
+                        <!--<li><a href="/income">Income (Non transaction)</a></li>-->
                         <li><a href="/range">General Ledger</a></li>
                     </ul>
                 </li>
             </ul>
-            <div class="navbar-header navbar-right">
-                <form action="/logout" method="post" id="logoutForm">
-                    <input type="hidden" name="${_csrf.parameterName}"
-                           value="${_csrf.token}" />
-                    <a onclick="document.getElementById('logoutForm').submit()" href="#" id="#btnLogOut" class="navbar-brand"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-                </form>
+            <div class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="usernamee2" class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="${username}"/>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a onclick="document.getElementById('logoutForm').submit()" href="#" id="#btnLogOut"><span class="fa fa-sign-out"></span> Logout</a>
+                        </li>
+                    </ul>
+                </li>
             </div>
+            <form action="/logout" method="post" id="logoutForm" >
+                <input type="hidden" name="${_csrf.parameterName}"
+                       value="${_csrf.token}" />
+            </form>
         </div>
     </nav>
 </div>

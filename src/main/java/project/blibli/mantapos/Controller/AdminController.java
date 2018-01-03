@@ -12,9 +12,8 @@ import java.sql.SQLException;
 
 @RestController
 public class AdminController {
-    int itemPerPage=5;
 
-    AdminService adminService = new AdminService();
+    AdminService adminService;
 
     @Autowired
     public AdminController(AdminService adminService){

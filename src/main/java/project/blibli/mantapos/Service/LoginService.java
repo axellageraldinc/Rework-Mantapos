@@ -6,7 +6,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class LoginService {
-
     public ModelAndView getMappingLogin(String error,
                                         String logout){
         ModelAndView mav = new ModelAndView();
@@ -22,12 +21,17 @@ public class LoginService {
 
     public ModelAndView getMappingIndexPageDefaultSuccessLogin(Authentication authentication){
         ModelAndView mav = new ModelAndView();
-        if(authentication.getAuthorities().toString().equals("[cashier]"))
+        if(authentication == null){
+            mav.setViewName("redirect:/login");
+        }
+        else if(authentication.getAuthorities().toString().equals("[cashier]"))
             mav.setViewName("redirect:/cashier");
-        else if(authentication.getAuthorities().toString().equals("[manager]") || authentication.getAuthorities().toString().equals("[owner]"))
+        else if(authentication.getAuthorities().toString().equals("[manager]") || authentication.getAuthorities().toString().equals("[owner]")){
             mav.setViewName("redirect:/dashboard");
-        else
+        }
+        else if(authentication.getAuthorities().toString().equals("[admin]")) {
             mav.setViewName("redirect:/restaurant");
+        }
         return mav;
     }
 

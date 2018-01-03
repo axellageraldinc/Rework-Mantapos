@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8"/>
     <title>EDIT MENU</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script src="https://use.fontawesome.com/65cbf9020d.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script"/>
 </head>
-<body>
+<body th:onload="'javascript:rename()'">
+
 <div th:replace="fragments/navbar-top-manager :: header"/>
+
+<span id="usernamee" style="display:none" th:text="${username}"></span>
+
 <div class="container containerLogin" style="margin-top: 100px;"><!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -68,33 +72,8 @@
 
     </section>
 </div>
-    <!--<div>-->
-        <!--<h3>EDIT MENU</h3>-->
-        <!--<form action="/edit-menu" method="post" enctype="multipart/form-data" commandName="multipartFile">-->
-            <!--<th:block th:each="menu : ${menuList}">-->
-                <!--<input type="hidden" th:value="${menu.id}"/>-->
-                <!--Menu Name:<br/>-->
-                <!--<input type="text" th:value="${menu.nama_menu}" name="nama_menu"/><br/>-->
-                <!--Menu Price:<br/>-->
-                <!--<input type="text" th:value="${menu.harga_menu}" name="harga_menu"/><br/>-->
-                <!--Category:<br/>-->
-                <!--<select name="kategori_menu" class="form-control">-->
-                    <!--<div th:if="${menu.kategori_menu == 'food'}">-->
-                        <!--<option selected="selected" value="food">Food</option>-->
-                        <!--<option value="drink">Drink</option>-->
-                    <!--</div>-->
-                    <!--<div th:if="${menu.kategori_menu == 'drink'}">-->
-                        <!--<option value="food">Food</option>-->
-                        <!--<option selected="selected" value="drink">Drink</option>-->
-                    <!--</div>-->
-                <!--</select>-->
-                <!--&lt;!&ndash;Upload Photo:<br/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<input type="file" name="multipartFile"/><br/>&ndash;&gt;-->
-                <!--<button type="submit">OK</button>-->
-            <!--</th:block>-->
-        <!--</form>-->
-    <!--</div>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js/"></script>
+<script type="text/javascript" src="/js/header.js/"></script>
 </body>
 </html>

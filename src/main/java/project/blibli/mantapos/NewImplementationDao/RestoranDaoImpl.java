@@ -1,5 +1,6 @@
 package project.blibli.mantapos.NewImplementationDao;
 
+import org.springframework.stereotype.Repository;
 import project.blibli.mantapos.Model.Restoran;
 import project.blibli.mantapos.NewInterfaceDao.RestoranDao;
 
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class RestoranDaoImpl implements RestoranDao {
 
     private static final String tableRestoran = "restoran";

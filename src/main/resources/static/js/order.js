@@ -268,13 +268,3 @@ function checkboxKirimEmailReceipt(){
         is_kirim_email_receipt.value = "no"
     }
 }
-
-
-// $(document).ready(function(){
-//            $("'btn' + ${menu.id}").click(function(e){
-//                e.preventDefault();
-//
-//                $(this).attr('disabled', true);
-//            }
-//        }
-//}))

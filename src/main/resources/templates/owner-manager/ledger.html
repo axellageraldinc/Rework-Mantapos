@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8"/>
     <title th:text="${skala_ledger}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <script src="https://use.fontawesome.com/65cbf9020d.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script"/>
 </head>
-<body>
+<body th:onload="'javascript:rename()'">
 <div th:replace="fragments/navbar-top-manager :: header"/>
+
+<span id="usernamee" style="display:none" th:text="${username}"></span>
+
 <div class="container" style="margin-top: 50px;">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -179,6 +184,7 @@
     <!--</div>-->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js/"></script>
+<script type="text/javascript" src="/js/header.js/"></script>
 </body>
 </html>

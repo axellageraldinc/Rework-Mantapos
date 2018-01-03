@@ -1,5 +1,6 @@
 package project.blibli.mantapos.Service.OwnerManager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -7,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import project.blibli.mantapos.Helper.GetIdResto;
 import project.blibli.mantapos.Model.Menu;
 import project.blibli.mantapos.NewImplementationDao.MenuDaoImpl;
+import project.blibli.mantapos.NewInterfaceDao.MenuDao;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +19,13 @@ import java.util.List;
 @Service
 public class MenuService {
 
-    MenuDaoImpl menuDao = new MenuDaoImpl();
+    MenuDao menuDao;
+
+    @Autowired
+    public MenuService(MenuDao menuDao){
+        this.menuDao = menuDao;
+    }
+
     int itemPerPage=5;
     private static String UPLOAD_LOCATION=System.getProperty("user.dir") + "/src/main/resources/static/images/";
 
@@ -38,6 +46,7 @@ public class MenuService {
             pageList.add(i);
         }
         mav.addObject("pageList", pageList);
+        mav.addObject("username", authentication.getName());
         return mav;
     }
 
@@ -75,7 +84,7 @@ public class MenuService {
     private List<Menu> getAllMenu(int idResto,
                                  int page) throws SQLException {
         List<Menu> menuList = menuDao.getAll("id_resto=" + idResto +
-                " AND enabled=true" + " ORDER BY kategori_menu DESC LIMIT " + itemPerPage + " OFFSET " + (page-1)*itemPerPage);
+                " AND enabled=true" + " ORDER BY kategori_menu DESC, id_menu ASC LIMIT " + itemPerPage + " OFFSET " + (page-1)*itemPerPage);
         return menuList;
     }
 

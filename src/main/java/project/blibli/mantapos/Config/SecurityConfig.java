@@ -17,16 +17,16 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //Class yang mengatur konfigurasi mengenai security
-
-    //Melakukan AutoWired untuk DataSource (Database)
-    @Qualifier("dataSource")
-    @Autowired
     DataSource dataSource;
-
-    //Melakukan AutoWired untuk BCryptPasswordEncoder (untuk encrypt password)
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public SecurityConfig(@Qualifier("dataSource") DataSource dataSource,
+                          BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.dataSource = dataSource;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    //Class yang mengatur konfigurasi mengenai security
 
     //Melakukan AutoWired untuk hal Authentication
     @Autowired

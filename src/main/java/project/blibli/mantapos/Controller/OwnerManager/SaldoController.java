@@ -22,9 +22,8 @@ public class SaldoController {
 
     //Jika user akses /saldo/page, sama dengan menu, outcome, dan employee untuk paging-nya
     @GetMapping(value = "/saldo")
-    public ModelAndView addSaldoAwalHtml(@RequestParam(value = "page", required = false) Integer page,
-                                         Authentication authentication) throws SQLException {
-        return saldoService.getMappingSaldoAwal(authentication, page);
+    public ModelAndView addSaldoAwalHtml(Authentication authentication) throws SQLException {
+        return saldoService.getMappingSaldoAwal(authentication);
     }
 
     //Jika user menambahkan saldo baru

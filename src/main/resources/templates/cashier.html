@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8"/>
     <title>CASHIER</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <script src="https://use.fontawesome.com/65cbf9020d.js"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script"/>
 </head>
 <body onload="startTime()">
@@ -40,7 +43,7 @@
                 <form action="/logout" method="post" id="logoutForm">
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}" />
-                    <a onclick="document.getElementById('logoutForm').submit()" href="#" id="#btnLogOut" class="navbar-brand"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                    <a onclick="document.getElementById('logoutForm').submit()" href="#" id="#btnLogOut" class="navbar-brand"><span class="fa fa-sign-out" style="font-size: 22px"></span> Logout</a>
                 </form>
             </div>
         </div>
@@ -261,7 +264,7 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js/"></script>
     <script th:src="@{/js/order.js}"></script>
 
 </sec:authorize>

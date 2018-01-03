@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Restoran Baru</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <script src="https://use.fontawesome.com/65cbf9020d.js"></script>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script"/>
 </head>
 <body>
 <div th:replace="fragments/navbar-top-admin :: header"/>

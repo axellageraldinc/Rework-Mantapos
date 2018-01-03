@@ -41,7 +41,8 @@ public class CashierController {
                                      @RequestParam(value = "email_kirim_receipt", required = false) String email_kirim_receipt,
                                      @RequestParam("namaResto") String nama_resto,
                                      @RequestParam("customer_name") String nama_customer,
+                                     @RequestParam(value = "notes", required = false) String notes,
                                      Authentication authentication) throws SQLException {
-        return cashierService.postMappingCashier(ledger, array_id_order, array_qty, is_kirim_email_receipt, email_kirim_receipt, nama_resto, nama_customer, authentication, templateEngine, mail);
+        return cashierService.postMappingCashier(ledger, array_id_order, array_qty, is_kirim_email_receipt, email_kirim_receipt, nama_resto, nama_customer, authentication, notes, templateEngine, mail);
     }
 }
