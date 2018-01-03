@@ -70,6 +70,12 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<version>1.4.3.RELEASE</version>
 		</dependency>
+		<!-- hot swapping, disable cache for template, enable live reload -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!-- Dependency untuk JDBC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
