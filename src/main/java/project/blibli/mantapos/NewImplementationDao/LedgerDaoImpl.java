@@ -100,13 +100,15 @@ public class LedgerDaoImpl implements LedgerDao {
                         this.idResto + "," +
                         tipe + "," +
                         biaya + "," +
+                        dateCreated + "," +
                         keperluan + ")" +
-                        "VALUES (?,?::" + tipeLedger + ",?,?)"
+                        "VALUES (?,?::" + tipeLedger + ",?,?,?)"
         );
         preparedStatement.setInt(1, modelData.getId_resto());
         preparedStatement.setString(2, modelData.getTipe());
         preparedStatement.setInt(3, modelData.getBiaya());
-        preparedStatement.setString(4, modelData.getKeperluan() + "(" + modelData.getQuantity() + ")");
+        preparedStatement.setTimestamp(4, modelData.getDateCreated());
+        preparedStatement.setString(5, modelData.getKeperluan() + "(" + modelData.getQuantity() + ")");
         preparedStatement.executeUpdate();
         DbConnection.closePreparedStatement(preparedStatement);
         DbConnection.closeConnection(connection);

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SaldoAwalDaoImpl implements SaldoDao {
+public class                                                                                                                                                     SaldoAwalDaoImpl implements SaldoDao {
 
     private static final String tableSaldoAwal = "saldo_awal";
     private static final String idResto = "id_resto";
