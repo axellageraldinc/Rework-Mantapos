@@ -33,7 +33,6 @@ public class SaldoAkhirDaoImpl implements SaldoDao {
                         idResto + " INT NOT NULL, " +
                         saldoAkhir + " REAL NOT NULL, " +
                         dateCreated + " TIMESTAMP NOT NULL DEFAULT NOW(), " +
-                        "UNIQUE (" + idResto + "), " +
                         "CONSTRAINT id_resto_fk FOREIGN KEY (" + idResto + ")" + "REFERENCES " + refTableResto + "(id))"
         );
         preparedStatement.executeUpdate();
@@ -45,11 +44,12 @@ public class SaldoAkhirDaoImpl implements SaldoDao {
     public void insert(Saldo modelData) throws SQLException {
         Connection connection = DbConnection.openConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO " + tableSaldoAkhir + "(" + this.idResto + "," + saldoAkhir + ")" +
-                        "VALUES(?,?)"
+                "INSERT INTO " + tableSaldoAkhir + "(" + this.idResto + "," + saldoAkhir + "," + dateCreated + ")" +
+                        "VALUES(?,?,?)"
         );
         preparedStatement.setInt(1, modelData.getId_resto());
         preparedStatement.setInt(2, modelData.getSaldo());
+        preparedStatement.setTimestamp(3, modelData.getDateCreated());
         preparedStatement.executeUpdate();
         DbConnection.closePreparedStatement(preparedStatement);
         DbConnection.closeConnection(connection);

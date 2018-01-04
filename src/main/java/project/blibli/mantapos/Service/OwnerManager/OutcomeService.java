@@ -92,7 +92,7 @@ public class OutcomeService {
         int totalPemasukkanBulanIni = ledgerDao.getTotal(condition + " AND tipe='debit'");
         int totalPengeluaranBulanIni = ledgerDao.getTotal(condition + " AND tipe='kredit'");
         saldo.setSaldo(saldoAwal + totalPemasukkanBulanIni - totalPengeluaranBulanIni);
-        if(saldoAkhirDao.count("id_resto=" + idResto)==0){
+        if(saldoAkhirDao.count("id_resto=" + idResto + " AND EXTRACT(MONTH FROM date_created)=" + bulan + " AND EXTRACT(YEAR FROM date_created)=" + tahun)==0){
             saldoAkhirDao.insert(saldo);
         } else{
             saldoAkhirDao.update(saldo, "id_resto=" + idResto +
@@ -107,7 +107,7 @@ public class OutcomeService {
     }
 
     private int getCountOutcome(int idResto) throws SQLException {
-        int countOutcome = ledgerDao.count("id_resto=" + idResto);
+        int countOutcome = ledgerDao.count("id_resto=" + idResto + " AND tipe='kredit'");
         return countOutcome;
     }
 

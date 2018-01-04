@@ -78,7 +78,7 @@ public class MantaposApplication {
 		MenuYangDipesanDaoImpl menuYangDipesanDao = new MenuYangDipesanDaoImpl();
 		menuYangDipesanDao.createTable();
 
-		Ledger ledger = null;
+		Ledger ledger;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date;
 		Timestamp timestamp;
@@ -93,28 +93,53 @@ public class MantaposApplication {
 					ledger = new Ledger(2, 9000, "penjualan menu", "debit");
 				} else{
 					ledger = new Ledger(2, 3000, "pengeluaran", "kredit");
+					ledger.setQuantity(String.valueOf(biaya) + "kg");
 				}
 				customDate = "2018-" + i + "-" + j + " 10:00:00";
 				date = sdf.parse(customDate);
 				timestamp = new Timestamp(date.getTime());
 				ledger.setDateCreated(timestamp);
 				ledgerDao.insert(ledger);
-				updateSaldoAkhir(i, 2018, 2, ledgerDao, saldoAkhirDao, saldoAwalDao);
+				updateSaldoAkhir(i, 2018, 2, timestamp);
+				String[] arrayIdMenu = new String[1];
+				String[] arrayQtyMenu = new String[1];
+				arrayQtyMenu[0] = String.valueOf(1);
+				if(biaya%2==0) {
+					arrayIdMenu[0] = String.valueOf(2);
+					insertDetailMenuYangDipesan(getLastIdOrder(2), arrayIdMenu, arrayQtyMenu);
+				} else{
+					arrayIdMenu[0] = String.valueOf(3);
+					insertDetailMenuYangDipesan(getLastIdOrder(2), arrayIdMenu, arrayQtyMenu);
+				}
 			}
-			System.out.println("nilai i : " + i);
 		}
 
+	}
+
+	private static void insertDetailMenuYangDipesan(int idOrder, String[] arrayIdMenu, String[] arrayQtyMenu) throws SQLException {
+		MenuYangDipesanDaoImpl menuYangDipesanDao = new MenuYangDipesanDaoImpl();
+		for (int i=0; i<arrayIdMenu.length; i++){
+			menuYangDipesanDao.insert(new OrderedMenu(idOrder, Integer.parseInt(arrayIdMenu[i]), Integer.parseInt(arrayQtyMenu[i])));
+		}
+	}
+
+	private static int getLastIdOrder(int idResto) throws SQLException {
+		LedgerDaoImpl ledgerDao = new LedgerDaoImpl();
+		int lastIdOrder = ledgerDao.getId("id_resto=" + idResto);
+		return lastIdOrder;
 	}
 
 	private static void updateSaldoAkhir(int bulan,
 										 int tahun,
 										 int idResto,
-										 LedgerDaoImpl ledgerDao,
-										 SaldoAkhirDaoImpl saldoAkhirDao,
-										 SaldoAwalDaoImpl saldoAwalDao) throws SQLException {
+										 Timestamp timestamp) throws SQLException {
+		LedgerDaoImpl ledgerDao = new LedgerDaoImpl();
+		SaldoAkhirDaoImpl saldoAkhirDao = new SaldoAkhirDaoImpl();
+		SaldoAwalDaoImpl saldoAwalDao = new SaldoAwalDaoImpl();
 		Saldo saldo = new Saldo();
+		saldo.setDateCreated(timestamp);
 		saldo.setId_resto(idResto);
-		int saldoAwal=0;
+		int saldoAwal;
 		if(bulan==1){
 			saldoAwal = saldoAkhirDao.getOne("id_resto=" + idResto +
 					" AND EXTRACT(MONTH FROM date_created)=12 AND EXTRACT(YEAR from date_created)=" + (tahun-1)).getSaldo();
@@ -130,7 +155,7 @@ public class MantaposApplication {
 		int totalPemasukkanBulanIni = ledgerDao.getTotal(condition + " AND tipe='debit'");
 		int totalPengeluaranBulanIni = ledgerDao.getTotal(condition + " AND tipe='kredit'");
 		saldo.setSaldo(saldoAwal + totalPemasukkanBulanIni - totalPengeluaranBulanIni);
-		if(saldoAkhirDao.count("id_resto=" + idResto)==0){
+		if(saldoAkhirDao.count("id_resto=" + idResto + " AND EXTRACT(MONTH FROM date_created)=" + bulan + " AND EXTRACT(YEAR FROM date_created)=" + tahun)==0){
 			saldoAkhirDao.insert(saldo);
 		} else{
 			saldoAkhirDao.update(saldo, "id_resto=" + idResto +
